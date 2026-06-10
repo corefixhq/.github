@@ -20,17 +20,6 @@ CoreFix is a security scanning platform that runs 10+ open source scanners in pa
 
 ---
 
-### Repositories
-
-| Repo | What it is |
-|---|---|
-| **[cfix](https://github.com/corefixhq/cfix)** | Code scanner Docker image — SAST, secrets, SCA, IaC, K8s. Pull and scan in one command. |
-| **[cfix-web](https://github.com/corefixhq/cfix-web)** | Web scanner Docker image — DAST, CVEs, port scanning, SSL/TLS, API fuzzing. |
-| **[security-tools-mcp](https://github.com/corefixhq/security-tools-mcp)** | Open source MCP server wrapping 50+ security CLI tools for AI agents. Raw output, community-driven. |
-| **[cfix-skills](https://github.com/corefixhq/cfix-skills)** | Open source code review skills library for Claude Code, Cursor, and Copilot. Auto-detected by language and framework. |
-| **[docs](https://github.com/corefixhq/docs)** | Documentation source for [docs.corefix.dev](https://docs.corefix.dev). |
-
----
 
 ### How it works
 
@@ -119,7 +108,6 @@ First results in under 4 minutes.
 - **WAF enforcement** — temporary Cloudflare/AWS WAF rules deployed alongside code fixes for immediate protection
 - **Cloud drift detection** — IaC vs actual cloud resources, Prowler integration, Terraform fix PRs
 - **LLM agent security** — prompt injection, jailbreak, tool-call authorization testing for AI agents
-- **OSRP** — Open Secret Rotation Protocol, a proposed standard for universal cross-provider secret revocation
 - **`.patcher`** — surgical CVE patches for current dependency versions without breaking upgrades
 
 Full roadmap: [corefix.dev/roadmap](https://corefix.dev/roadmap)
