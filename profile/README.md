@@ -2,7 +2,9 @@
 
 **Find it at runtime. Fix it in code.**
 
-CoreFix is a security scanning platform that runs 10+ open source scanners in parallel, attacks your running web application, deduplicates findings across all tools, AI-prioritizes by real exploitability, and opens pull requests to fix what's actually dangerous. From confirmed exploit to merged fix — one pipeline.
+Hybrid architecture security platform: deterministic scanning pipelines (10+ battle-tested open source scanners) + LLM enrichment layer for AI prioritization, false positive reduction, and auto-fix PR generation. Best-in-class scanners do the detection. LLMs do the thinking. Your team does the merging.
+
+CoreFix runs OpenGrep, Gitleaks, OSV-Scanner, KICS, Kubescape, OWASP ZAP, Nuclei, Nmap, testssl.sh, and SSLyze in parallel — then normalizes, deduplicates across all tools, AI-ranks by real exploitability (not just CVSS), and opens pull requests with verified patches. Code scanning and web app attack testing in one pipeline. From confirmed runtime exploit to merged fix.
 
 ---
 
@@ -20,24 +22,29 @@ CoreFix is a security scanning platform that runs 10+ open source scanners in pa
 
 ---
 
-
 ### How it works
+
+**Deterministic layer** — Open source scanners handle detection. Rule-based, reproducible, zero hallucination. OpenGrep runs 3,000+ SAST rules. Gitleaks scans full git history. OSV checks every dependency against the CVE database with reachability analysis. ZAP fires real attack payloads. These produce the same results every time on the same codebase.
+
+**LLM layer** — AI handles everything that needs reasoning. Cross-scanner deduplication (is this OpenGrep finding the same issue ZAP confirmed?), exploitability scoring (is this reachable from a public endpoint?), false positive reduction (does this pattern actually matter in this codebase context?), and fix generation (what's the correct parameterized query for this specific ORM?).
+
+**Why hybrid?** Scanners alone produce 400 noisy alerts. LLMs alone hallucinate vulnerabilities that don't exist. The combination gives you high-recall detection (scanners miss nothing) with high-precision prioritization (LLMs filter the noise).
 
 ```
 Connect repo + URL
        │
        ▼
-  10+ scanners run in parallel
+  10+ scanners run in parallel                ← Deterministic
   SAST · Secrets · SCA · IaC · K8s · DAST · CVEs · SSL/TLS
        │
        ▼
-  Normalize → Deduplicate → AI Prioritize
+  Normalize → Deduplicate → AI Prioritize     ← LLM layer
        │
        ▼
-  Trace runtime findings → source code
+  Trace runtime findings → source code        ← Hybrid
        │
        ▼
-  Generate fix → Open PR → Merge
+  Generate fix → Open PR → Merge              ← LLM layer
 ```
 
 Triggers automatically on every push, PR, and release via the GitHub App. Or run locally with Docker — your code never leaves your environment.
